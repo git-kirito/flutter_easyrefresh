@@ -12,11 +12,12 @@ import 'src/header/header.dart';
 class PhoenixHeader extends Header {
   /// Key
   final Key key;
-
+  final Color color;
   final LinkHeaderNotifier linkNotifier = LinkHeaderNotifier();
 
   PhoenixHeader({
     this.key,
+    this.color = Colors.blue,
     bool enableHapticFeedback = false,
   }) : super(
           extent: 80.0,
@@ -65,9 +66,10 @@ class PhoenixHeader extends Header {
 /// 金色校园组件
 class PhoenixHeaderWidget extends StatefulWidget {
   final LinkHeaderNotifier linkNotifier;
-
+  final Color color;
   const PhoenixHeaderWidget({
     Key key,
+    this.color,
     this.linkNotifier,
   }) : super(key: key);
 
@@ -158,7 +160,7 @@ class PhoenixHeaderWidgetState extends State<PhoenixHeaderWidget> {
         Container(
           width: double.infinity,
           height: double.infinity,
-          color: Colors.blue,
+          color: widget.color,
         ),
         // 云
         Positioned(

@@ -16,10 +16,14 @@ class BallPulseFooter extends Footer {
   /// 背景颜色
   final Color backgroundColor;
 
+  /// 颜色
+  final List<Color> colors;
+
   final LinkFooterNotifier linkNotifier = LinkFooterNotifier();
 
   BallPulseFooter({
     this.key,
+    this.colors,
     this.color = Colors.blue,
     this.backgroundColor = Colors.transparent,
     bool enableHapticFeedback = true,
@@ -50,6 +54,7 @@ class BallPulseFooter extends Footer {
         axisDirection == AxisDirection.down ||
             axisDirection == AxisDirection.up,
         'Widget cannot be horizontal');
+    assert(colors != null && colors.length != 3);
     linkNotifier.contentBuilder(
         context,
         loadState,
@@ -64,7 +69,7 @@ class BallPulseFooter extends Footer {
         noMore);
     return BallPulseFooterWidget(
       key: key,
-      color: color,
+      colors: colors ?? [color, color, color],
       backgroundColor: backgroundColor,
       linkNotifier: linkNotifier,
     );
@@ -74,7 +79,7 @@ class BallPulseFooter extends Footer {
 /// 球脉冲组件
 class BallPulseFooterWidget extends StatefulWidget {
   /// 颜色
-  final Color color;
+  final List<Color> colors;
 
   /// 背景颜色
   final Color backgroundColor;
@@ -83,8 +88,8 @@ class BallPulseFooterWidget extends StatefulWidget {
 
   const BallPulseFooterWidget({
     Key key,
-    this.color,
     this.backgroundColor,
+    this.colors,
     this.linkNotifier,
   }) : super(key: key);
 
@@ -187,7 +192,7 @@ class BallPulseFooterWidgetState extends State<BallPulseFooterWidget> {
                   child: Center(
                     child: ClipOval(
                       child: AnimatedContainer(
-                        color: widget.color,
+                        color: widget.colors[0]
                         height: _ballSize1,
                         width: _ballSize1,
                         duration: _ballSizeDuration,
@@ -204,7 +209,7 @@ class BallPulseFooterWidgetState extends State<BallPulseFooterWidget> {
                   child: Center(
                     child: ClipOval(
                       child: AnimatedContainer(
-                        color: widget.color,
+                        color: widget.colors[1],
                         height: _ballSize2,
                         width: _ballSize2,
                         duration: _ballSizeDuration,
@@ -221,7 +226,7 @@ class BallPulseFooterWidgetState extends State<BallPulseFooterWidget> {
                   child: Center(
                     child: ClipOval(
                       child: AnimatedContainer(
-                        color: widget.color,
+                        color: widget.colors[2],
                         height: _ballSize3,
                         width: _ballSize3,
                         duration: _ballSizeDuration,
